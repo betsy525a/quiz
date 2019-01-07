@@ -11,4 +11,10 @@ $(document).ready(function() {
         var totalScore;
     });
 
+    $("#result1").click(function() {
+       var selectedValue = $("input[name='1']:checked").val(); 
+       $("#result11").text(selectedValue);
+    });
+    
 });
+
