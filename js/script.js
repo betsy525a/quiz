@@ -14,7 +14,8 @@ $(document).ready(function() {
     var hershinson = 0;
     var mrRivera = 0;
     var cohen = 0;
-        
+    var biggestNumber = 0;
+    var teacherScore = "";    
     
     $("button").click(function() {
         //for test. delete this later
@@ -31,6 +32,8 @@ $(document).ready(function() {
         hershinson = 0;
         mrRivera = 0;
         cohen = 0;
+        biggestNumber = 0;
+        teacherScore = "";
         //end of test
         var q1Result = $("input[name='question1']:checked").val();
         var q2Result = $("input[name='question2']:checked").val();
@@ -76,6 +79,31 @@ $(document).ready(function() {
         $("#test").append("<p>The score for Hershinson is " + hershinson + "</p>");
         $("#test").append("<p>The score for Mr. Rivera is " + mrRivera + "</p>");
         $("#test").append("<p>The score for Cohen is " + cohen + "</p>");
+        
+        $('input[name=question1]').attr('checked',false);
+        $('input[name=question2]').attr('checked',false);
+        $('input[name=question3]').attr('checked',false);
+        $('input[name=question4]').attr('checked',false);
+        $('input[name=question5]').attr('checked',false);
+        $('input[name=question6]').attr('checked',false);
+        $('input[name=question7]').attr('checked',false);
+        $('input[name=question8]').attr('checked',false);
+        $('input[name=question9]').attr('checked',false);
+        $('input[name=question10]').attr('checked',false);
+        $('input[name=question11]').attr('checked',false);
+        $('input[name=question12]').attr('checked',false);
+        $('input[name=question13]').attr('checked',false);
+        $('input[name=question14]').attr('checked',false);
+        $('input[name=question15]').attr('checked',false);
+        
+        var teacherArray = [williams, quinones, tancreto, lewis, betancourt, mobley, carmona, msRivera, echChaouy, hershinson, mrRivera, cohen];
+        var teacherNames = ["Ms. Williams", "Mr. Quinones", "Mrs. Tancreto", "Mrs. Lewis-Lane", "Ms. Betancourt", "Ms. Mobley", "Ms. Carmona", "Ms. Rivera", "Mr. EchChaouy", "Mrs. Hershinson", "Mr. Rivera", "Ms. Cohen"];
+        
+        biggestNumber = biggestValue(teacherArray);
+        
+        teacherScore = whichTeacher(biggestNumber, teacherArray, teacherNames);
+        
+        $("#test").append("<p>You are most similar to " + teacherScore + " with a score of " + biggestNumber + ".</p>");
     });
     
     function question1(userPick) {
@@ -239,6 +267,14 @@ $(document).ready(function() {
             msRivera = msRivera + 1;
             hershinson = hershinson + 1;
         }
+        else if(userPick === "MO & BE"){
+            mobley = mobley + 1;
+            betancourt = betancourt + 1;
+        }
+        else if(userPick === "CA & BE"){
+            carmona = carmona + 1;
+            betancourt = betancourt + 1;
+        }
         else {
             tallyUp1(userPick);
         }
@@ -270,6 +306,15 @@ $(document).ready(function() {
         if(userPick === "MO & CO"){
             mobley = mobley + 1;
             cohen = cohen + 1;
+        }
+        else if(userPick === "WI & BE"){
+            williams = williams + 1;
+            betancourt = betancourt + 1;
+        }
+        else if(userPick === "LE & BE & MsR"){
+            lewis = lewis + 1;
+            betancourt = betancourt + 1;
+            msRivera = msRivera + 1;
         }
         else {
             tallyUp1(userPick);
@@ -369,6 +414,27 @@ $(document).ready(function() {
         }
     }
     
+    function biggestValue(array) {
+        var biggestNumber = -1;
+        array.forEach(function(teacher) {
+            if (teacher > biggestNumber) {
+                biggestNumber = teacher;
+            }
+        });
+        return biggestNumber;
+    }
+    
+    function whichTeacher(biggestNumber, variables, teacherNamesArray) {
+        var teacherResult = "";
+        var count = 0;
+        variables.forEach(function(name) {
+            if (name === biggestNumber) {
+                teacherResult = teacherResult + teacherNamesArray[count] + " ";
+            }
+            count++;
+        });
+        return teacherResult;
+    }
 });
 
 /*
@@ -462,6 +528,13 @@ Grade, workout, eat, go to the store
 4th floor
 not enough 6-7
 Usually 3:30-4pm
+hispanic food, seafood, sushi, avocado
+upbeat music
+Remember the Titans, Good Will Hunting, Friday Night Lights, Freedom Writers, Armageddon, Zero Dark Thirty, Clueless, A league of their own, My best friend's wedding
+Elektra Natchios, Jessica Jones, Lorelei Gilmore, Lyla Garrity, Julia Roberts, Rachel McAdams, Maggie Gyllenhaal, Emmanuel Chriqui, Ashley Tisdale, Jennifer Lopez, Jennifer Anniston
+Cellphone with service, My dog
+Teleportation, Invisibility
+Student Loans, book a really fun trip around the world
 
 Carmona: CA
 Blue
