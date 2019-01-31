@@ -2,6 +2,8 @@
 
 $(document).ready(function() {
     
+    
+    $("#endResult").hide();
     var williams = 0;
     var quinones = 0;
     var tancreto = 0;
@@ -18,23 +20,6 @@ $(document).ready(function() {
     var teacherScore = "";    
     
     $("button").click(function() {
-        //for test. delete this later
-        $("#test").text("");
-        williams = 0;
-        quinones = 0;
-        tancreto = 0;
-        lewis = 0;
-        mobley = 0;
-        betancourt = 0;
-        carmona = 0;
-        msRivera = 0;
-        echChaouy = 0;
-        hershinson = 0;
-        mrRivera = 0;
-        cohen = 0;
-        biggestNumber = 0;
-        teacherScore = "";
-        //end of test
         var q1Result = $("input[name='question1']:checked").val();
         var q2Result = $("input[name='question2']:checked").val();
         var q3Result = $("input[name='question3']:checked").val();
@@ -80,6 +65,38 @@ $(document).ready(function() {
         $("#test").append("<p>The score for Mr. Rivera is " + mrRivera + "</p>");
         $("#test").append("<p>The score for Cohen is " + cohen + "</p>");
         
+        var teacherArray = [williams, quinones, tancreto, lewis, betancourt, mobley, carmona, msRivera, echChaouy, hershinson, mrRivera, cohen];
+        var teacherNames = ["Ms. Williams", "Mr. Quinones", "Mrs. Tancreto", "Mrs. Lewis-Lane", "Ms. Betancourt", "Ms. Mobley", "Ms. Carmona", "Ms. Rivera", "Mr. EchChaouy", "Mrs. Hershinson", "Mr. Rivera", "Ms. Cohen"];
+        
+        biggestNumber = biggestValue(teacherArray);
+        
+        teacherScore = whichTeacher(biggestNumber, teacherArray, teacherNames);
+        
+        $("#test").append("<p>You are most similar to " + teacherScore + " with a score of " + biggestNumber + ".</p>");
+        
+        $(".questions").hide();
+        $(".result").hide();
+        $("#endResult").show();
+        
+    });
+    
+    $("#again").click(function() {
+        $("#test").text("");
+        williams = 0;
+        quinones = 0;
+        tancreto = 0;
+        lewis = 0;
+        mobley = 0;
+        betancourt = 0;
+        carmona = 0;
+        msRivera = 0;
+        echChaouy = 0;
+        hershinson = 0;
+        mrRivera = 0;
+        cohen = 0;
+        biggestNumber = 0;
+        teacherScore = "";
+        
         $('input[name=question1]').attr('checked',false);
         $('input[name=question2]').attr('checked',false);
         $('input[name=question3]').attr('checked',false);
@@ -96,14 +113,9 @@ $(document).ready(function() {
         $('input[name=question14]').attr('checked',false);
         $('input[name=question15]').attr('checked',false);
         
-        var teacherArray = [williams, quinones, tancreto, lewis, betancourt, mobley, carmona, msRivera, echChaouy, hershinson, mrRivera, cohen];
-        var teacherNames = ["Ms. Williams", "Mr. Quinones", "Mrs. Tancreto", "Mrs. Lewis-Lane", "Ms. Betancourt", "Ms. Mobley", "Ms. Carmona", "Ms. Rivera", "Mr. EchChaouy", "Mrs. Hershinson", "Mr. Rivera", "Ms. Cohen"];
-        
-        biggestNumber = biggestValue(teacherArray);
-        
-        teacherScore = whichTeacher(biggestNumber, teacherArray, teacherNames);
-        
-        $("#test").append("<p>You are most similar to " + teacherScore + " with a score of " + biggestNumber + ".</p>");
+        $(".questions").show();
+        $(".result").show();
+        $("#endResult").hide();
     });
     
     function question1(userPick) {
